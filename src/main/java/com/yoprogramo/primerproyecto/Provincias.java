@@ -90,9 +90,10 @@ public class Provincias {
     private int[] provinceMaxTemp() {
         int[] temp_pos = new int[2];
         
-        temp_pos[0] = proximoNumeroComparar();
+        temp_pos[0] = 0;
+        //temp_pos[0] = proximoNumeroComparar();
         
-        for (int i = 1; i < 23; i++) {
+        for (int i = 0; i < 23; i++) {
             if (temperaturas[i] != 999 && 
                         temperaturas[i] >= temp_pos[0]) {
                 temp_pos[0] = temperaturas[i];
