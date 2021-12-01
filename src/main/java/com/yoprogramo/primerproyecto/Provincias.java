@@ -9,9 +9,10 @@ package com.yoprogramo.primerproyecto;
  * @author psalvi
  */
 public class Provincias {
-    private String[] provincias = new String[23];
-    private int[] temperaturas = new int[23];
-    private String[] provTemps = new String[10];
+    private final int cantProvinciasMax = 7;
+    private final String[] provincias = new String[23];
+    private final int[] temperaturas = new int[23];
+    private final String[] provTemps = new String[cantProvinciasMax * 2];
     
     public Provincias() {
         provincias[0] = "Jujuy";
@@ -51,44 +52,64 @@ public class Provincias {
         temperaturas[10] = 18;
         temperaturas[11] = 19;
         temperaturas[12] = 22;
-        temperaturas[13] = 27;
+        temperaturas[13] = 26;
         temperaturas[14] = 14;
         temperaturas[15] = 10;
-        temperaturas[16] = 18;
-        temperaturas[17] = 26;
+        temperaturas[16] = 17;
+        temperaturas[17] = 23;
         temperaturas[18] = 12;
         temperaturas[19] = 15;
         temperaturas[20] = 10;
-        temperaturas[21] = 12;
+        temperaturas[21] = 6;
         temperaturas[22] = 5;
     }
     
     public void program() {
         mayorArray();
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < cantProvinciasMax * 2; i++) {
             System.out.println(provTemps[i]);
         }
     }
     
     private void mayorArray() {
         int provGuardar = 0;
-        int posDelMayor = 0;
+        int[] datos = new int[2];
         
-        for (int j = 0; j < 5; j++) {
-            int numeroAComparar = temperaturas[j];
+        for (int j = 0; j < this.cantProvinciasMax; j++) {
+            datos = provinceMaxTemp();
             
-            for (int i = 1; i < 23; i++) {
-                if (temperaturas[i] != 999 && temperaturas[i] > numeroAComparar) {
-                    numeroAComparar = temperaturas[i];
-                    posDelMayor = i;
-                }
-            }
-            provTemps[provGuardar] = provincias[posDelMayor];
-            provTemps[provGuardar+1] = Integer.toString(temperaturas[posDelMayor]);
+            provTemps[provGuardar] = provincias[datos[1]];
+            provTemps[provGuardar+1] = Integer.toString(datos[0]);
             provGuardar +=2;
-            temperaturas[posDelMayor] = 999;
+            
+            temperaturas[datos[1]] = 999;
         }
     }
 
+    private int[] provinceMaxTemp() {
+        int[] temp_pos = new int[2];
+        
+        temp_pos[0] = proximoNumeroComparar();
+        
+        for (int i = 1; i < 23; i++) {
+            if (temperaturas[i] != 999 && 
+                        temperaturas[i] >= temp_pos[0]) {
+                temp_pos[0] = temperaturas[i];
+                temp_pos[1] = i;
+            }
+        }
+        return temp_pos;
+    }
+
+    private int proximoNumeroComparar() {
+        int tempComparar = 0;
+        for (int i = 0; i < 10; i++) {
+            if (temperaturas[i] != 999) {
+                tempComparar = temperaturas[i];
+                break;
+            }
+        }
+        return tempComparar;
+    }
 }
