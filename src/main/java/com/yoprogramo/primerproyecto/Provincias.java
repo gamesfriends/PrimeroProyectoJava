@@ -91,7 +91,6 @@ public class Provincias {
         int[] temp_pos = new int[2];
         
         temp_pos[0] = 0;
-        //temp_pos[0] = proximoNumeroComparar();
         
         for (int i = 0; i < 23; i++) {
             if (temperaturas[i] != 999 && 
@@ -101,16 +100,5 @@ public class Provincias {
             }
         }
         return temp_pos;
-    }
-
-    private int proximoNumeroComparar() {
-        int tempComparar = 0;
-        for (int i = 0; i < 10; i++) {
-            if (temperaturas[i] != 999) {
-                tempComparar = temperaturas[i];
-                break;
-            }
-        }
-        return tempComparar;
     }
 }
